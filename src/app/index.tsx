@@ -1,6 +1,8 @@
 import { Ionicons } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 import {
+  Alert,
+  Button,
   FlatList,
   Image,
   ImageBackground,
@@ -181,6 +183,14 @@ export default function Index() {
             artist="Teddy Swims"
             plays="438M plays"
             image="https://picsum.photos/seed/door-music/240/240"
+          />
+        </View>
+
+        <View style={styles.alertButton}>
+          <Button
+            title="Alert"
+            color="#ff0033"
+            onPress={() => Alert.alert("Alert Button pressed")}
           />
         </View>
       </ScrollView>
@@ -428,6 +438,10 @@ const styles = StyleSheet.create({
   },
   quickPicksList: {
     gap: 10,
+  },
+  alertButton: {
+    marginTop: 28,
+    marginBottom: 10,
   },
   songRow: {
     minHeight: 82,
