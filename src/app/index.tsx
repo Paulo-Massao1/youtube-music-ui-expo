@@ -5,7 +5,6 @@ import {
   Button,
   FlatList,
   Image,
-  ImageBackground,
   ScrollView,
   StyleSheet,
   Text,
@@ -25,16 +24,17 @@ function FilterChip(props: { label: string }) {
 
 function AlbumCard(props: { title: string; image: string }) {
   return (
-    <ImageBackground
-      source={{ uri: props.image }}
-      style={styles.albumCard}
-      imageStyle={styles.albumImage}
-    >
+    <View style={styles.albumCard}>
+      <Image
+        source={{ uri: props.image }}
+        style={styles.albumCover}
+        resizeMode="cover"
+      />
       <View style={styles.albumShade} />
       <Text numberOfLines={1} style={styles.albumTitle}>
         {props.title}
       </Text>
-    </ImageBackground>
+    </View>
   );
 }
 
@@ -356,8 +356,10 @@ const styles = StyleSheet.create({
     borderRadius: 9,
     backgroundColor: "#252525",
   },
-  albumImage: {
-    borderRadius: 9,
+  albumCover: {
+    position: "absolute",
+    width: "100%",
+    height: "100%",
   },
   albumShade: {
     position: "absolute",
