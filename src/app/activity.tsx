@@ -11,6 +11,8 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+const tennesseeCover = require("../../assets/images/tennessee-whiskey.jpeg");
+
 type ActivityItem = {
   id: string;
   artist: string;
@@ -170,10 +172,7 @@ export default function ActivityScreen() {
         onPress={() => router.push("/player" as Href)}
         style={styles.miniPlayer}
       >
-        <Image
-          source={{ uri: "https://picsum.photos/seed/tennessee-music/240/240" }}
-          style={styles.miniPlayerCover}
-        />
+        <Image source={tennesseeCover} style={styles.miniPlayerCover} />
         <View style={styles.miniPlayerDetails}>
           <Text numberOfLines={1} style={styles.miniPlayerTitle}>
             Tennessee Whiskey

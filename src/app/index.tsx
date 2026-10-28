@@ -15,6 +15,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const filters = ["Podcasts", "Energize", "Relax", "Workout", "Feel good"];
+const tennesseeCover = require("../../assets/images/tennessee-whiskey.jpeg");
 
 function FilterChip(props: { label: string }) {
   return (
@@ -44,11 +45,14 @@ function SongRow(props: {
   title: string;
   artist: string;
   plays: string;
-  image: string;
+  image: string | number;
 }) {
   return (
     <View style={styles.songRow}>
-      <Image source={{ uri: props.image }} style={styles.songCover} />
+      <Image
+        source={typeof props.image === "string" ? { uri: props.image } : props.image}
+        style={styles.songCover}
+      />
       <View style={styles.songDetails}>
         <Text numberOfLines={1} style={styles.songTitle}>
           {props.title}
@@ -183,7 +187,7 @@ export default function Index() {
             title="Tennessee Whiskey"
             artist="Chris Stapleton"
             plays="1.3B plays"
-            image="https://picsum.photos/seed/tennessee-music/240/240"
+            image={tennesseeCover}
           />
           <SongRow
             title="Beautiful Things"
@@ -213,10 +217,7 @@ export default function Index() {
         onPress={() => router.push("/player" as Href)}
         style={styles.miniPlayer}
       >
-        <Image
-          source={{ uri: "https://picsum.photos/seed/tennessee-music/240/240" }}
-          style={styles.miniPlayerCover}
-        />
+        <Image source={tennesseeCover} style={styles.miniPlayerCover} />
         <View style={styles.miniPlayerDetails}>
           <Text numberOfLines={1} style={styles.miniPlayerTitle}>
             Tennessee Whiskey

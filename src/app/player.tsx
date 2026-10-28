@@ -8,9 +8,12 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  useWindowDimensions,
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+
+const tennesseeCover = require("../../assets/images/tennessee-whiskey.jpeg");
 
 function ActionChip({
   icon,
@@ -30,6 +33,8 @@ function ActionChip({
 export default function PlayerScreen() {
   const router = useRouter();
   const [isPlaying, setIsPlaying] = useState(true);
+  const { height, width } = useWindowDimensions();
+  const coverSize = Math.min(width - 48, height * 0.44, 560);
 
   return (
     <SafeAreaView style={styles.screen}>
@@ -59,12 +64,14 @@ export default function PlayerScreen() {
         </View>
       </View>
 
-      <View style={styles.content}>
+      <ScrollView
+        style={styles.scrollView}
+        contentContainerStyle={styles.content}
+        showsVerticalScrollIndicator={false}
+      >
         <Image
-          source={{
-            uri: "https://picsum.photos/seed/tennessee-player/900/900?grayscale",
-          }}
-          style={styles.albumCover}
+          source={tennesseeCover}
+          style={[styles.albumCover, { width: coverSize, height: coverSize }]}
           resizeMode="cover"
         />
 
@@ -126,7 +133,7 @@ export default function PlayerScreen() {
           <View style={styles.dragHandle} />
           <Text style={styles.mixTitle}>Tennessee Whiskey Mix</Text>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -168,19 +175,21 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 22,
   },
-  content: {
+  scrollView: {
     flex: 1,
+  },
+  content: {
     paddingHorizontal: 24,
-    paddingTop: 42,
+    paddingTop: 24,
+    paddingBottom: 32,
   },
   albumCover: {
-    width: "100%",
-    aspectRatio: 1,
+    alignSelf: "center",
     borderRadius: 13,
     backgroundColor: "#3a3a3a",
   },
   songInformation: {
-    marginTop: 40,
+    marginTop: 28,
   },
   songTitleRow: {
     flexDirection: "row",
@@ -270,7 +279,7 @@ const styles = StyleSheet.create({
   },
   mixSection: {
     alignItems: "center",
-    marginTop: 47,
+    marginTop: 38,
   },
   dragHandle: {
     width: 43,
