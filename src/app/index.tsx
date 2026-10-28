@@ -203,7 +203,11 @@ export default function Index() {
         </View>
       </ScrollView>
 
-      <View style={styles.miniPlayer}>
+      <Pressable
+        accessibilityLabel="Open Tennessee Whiskey player"
+        onPress={() => router.push("/player" as Href)}
+        style={styles.miniPlayer}
+      >
         <Image
           source={{ uri: "https://picsum.photos/seed/tennessee-music/240/240" }}
           style={styles.miniPlayerCover}
@@ -218,7 +222,7 @@ export default function Index() {
         </View>
         <Ionicons name="tv-outline" size={27} color="#ffffff" />
         <Ionicons name="play" size={30} color="#ffffff" />
-      </View>
+      </Pressable>
 
       <View style={styles.bottomNavigation}>
         <View style={styles.navigationItem}>

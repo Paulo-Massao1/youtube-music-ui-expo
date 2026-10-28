@@ -1,5 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
+import { type Href, useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import {
   FlatList,
@@ -160,7 +160,11 @@ export default function ActivityScreen() {
         showsVerticalScrollIndicator={false}
       />
 
-      <View style={styles.miniPlayer}>
+      <Pressable
+        accessibilityLabel="Open Tennessee Whiskey player"
+        onPress={() => router.push("/player" as Href)}
+        style={styles.miniPlayer}
+      >
         <Image
           source={{ uri: "https://picsum.photos/seed/tennessee-music/240/240" }}
           style={styles.miniPlayerCover}
@@ -175,7 +179,7 @@ export default function ActivityScreen() {
         </View>
         <Ionicons name="tv-outline" size={27} color="#ffffff" />
         <Ionicons name="play" size={30} color="#ffffff" />
-      </View>
+      </Pressable>
 
       <BottomNavigation />
     </SafeAreaView>
