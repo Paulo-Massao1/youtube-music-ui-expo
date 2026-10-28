@@ -1,6 +1,8 @@
 import { Ionicons } from "@expo/vector-icons";
 import { type Href, useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
+import { QuickPickRow } from "@/components/QuickPickRow";
+import { SpeedDialTile } from "@/components/SpeedDialTile";
 import {
   Alert,
   Button,
@@ -21,47 +23,6 @@ function FilterChip(props: { label: string }) {
   return (
     <View style={styles.filterChip}>
       <Text style={styles.filterText}>{props.label}</Text>
-    </View>
-  );
-}
-
-function AlbumCard(props: { title: string; image: string }) {
-  return (
-    <View style={styles.albumCard}>
-      <Image
-        source={{ uri: props.image }}
-        style={styles.albumCover}
-        resizeMode="cover"
-      />
-      <View style={styles.albumShade} />
-      <Text numberOfLines={1} style={styles.albumTitle}>
-        {props.title}
-      </Text>
-    </View>
-  );
-}
-
-function SongRow(props: {
-  title: string;
-  artist: string;
-  plays: string;
-  image: string | number;
-}) {
-  return (
-    <View style={styles.songRow}>
-      <Image
-        source={typeof props.image === "string" ? { uri: props.image } : props.image}
-        style={styles.songCover}
-      />
-      <View style={styles.songDetails}>
-        <Text numberOfLines={1} style={styles.songTitle}>
-          {props.title}
-        </Text>
-        <Text numberOfLines={1} style={styles.songMetadata}>
-          {props.artist} · {props.plays}
-        </Text>
-      </View>
-      <Ionicons name="ellipsis-vertical" size={24} color="#ffffff" />
     </View>
   );
 }
@@ -130,39 +91,39 @@ export default function Index() {
         </View>
 
         <View style={styles.albumGrid}>
-          <AlbumCard
+          <SpeedDialTile
             title="let me love you - ..."
             image="https://picsum.photos/seed/palms-music/500/500"
           />
-          <AlbumCard
+          <SpeedDialTile
             title="Eu Me Rendo"
             image="https://picsum.photos/seed/praise-music/500/500"
           />
-          <AlbumCard
+          <SpeedDialTile
             title="STORM II"
             image="https://picsum.photos/seed/storm-music/500/500"
           />
-          <AlbumCard
+          <SpeedDialTile
             title="Rewind"
             image="https://picsum.photos/seed/rewind-music/500/500"
           />
-          <AlbumCard
+          <SpeedDialTile
             title="About You"
             image="https://picsum.photos/seed/about-you-music/500/500"
           />
-          <AlbumCard
+          <SpeedDialTile
             title="Psalm 96 (Intro)"
             image="https://picsum.photos/seed/psalm-music/500/500"
           />
-          <AlbumCard
+          <SpeedDialTile
             title="Where'd All the Time Go?"
             image="https://picsum.photos/seed/time-music/500/500"
           />
-          <AlbumCard
+          <SpeedDialTile
             title="Rein Me In"
             image="https://picsum.photos/seed/rein-music/500/500"
           />
-          <View style={[styles.albumCard, styles.abstractCard]}>
+          <View style={styles.abstractCard}>
             <View style={[styles.abstractCircle, styles.circleOne]} />
             <View style={[styles.abstractCircle, styles.circleTwo]} />
             <View style={[styles.abstractCircle, styles.circleThree]} />
@@ -183,19 +144,19 @@ export default function Index() {
         </View>
 
         <View style={styles.quickPicksList}>
-          <SongRow
+          <QuickPickRow
             title="Tennessee Whiskey"
             artist="Chris Stapleton"
             plays="1.3B plays"
             image={tennesseeCover}
           />
-          <SongRow
+          <QuickPickRow
             title="Beautiful Things"
             artist="Benson Boone"
             plays="892M plays"
             image="https://picsum.photos/seed/beautiful-music/240/240"
           />
-          <SongRow
+          <QuickPickRow
             title="The Door"
             artist="Teddy Swims"
             plays="438M plays"
@@ -366,36 +327,12 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     rowGap: 5,
   },
-  albumCard: {
+  abstractCard: {
     width: "32.6%",
     aspectRatio: 1,
     overflow: "hidden",
-    justifyContent: "flex-end",
-    borderRadius: 9,
-    backgroundColor: "#252525",
-  },
-  albumCover: {
-    position: "absolute",
-    width: "100%",
-    height: "100%",
-  },
-  albumShade: {
-    position: "absolute",
-    right: 0,
-    bottom: 0,
-    left: 0,
-    height: "36%",
-    backgroundColor: "rgba(0, 0, 0, 0.48)",
-  },
-  albumTitle: {
-    color: "#ffffff",
-    fontSize: 14,
-    fontWeight: "700",
-    paddingHorizontal: 7,
-    paddingBottom: 7,
-  },
-  abstractCard: {
     position: "relative",
+    borderRadius: 9,
     backgroundColor: "#100813",
   },
   abstractCircle: {
@@ -462,35 +399,6 @@ const styles = StyleSheet.create({
   alertButton: {
     marginTop: 28,
     marginBottom: 10,
-  },
-  songRow: {
-    minHeight: 82,
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 13,
-    padding: 9,
-    paddingRight: 12,
-    borderRadius: 9,
-    backgroundColor: "#181818",
-  },
-  songCover: {
-    width: 64,
-    height: 64,
-    borderRadius: 4,
-    backgroundColor: "#292929",
-  },
-  songDetails: {
-    flex: 1,
-    gap: 3,
-  },
-  songTitle: {
-    color: "#ffffff",
-    fontSize: 17,
-    fontWeight: "600",
-  },
-  songMetadata: {
-    color: "#a6a6a6",
-    fontSize: 15,
   },
   miniPlayer: {
     height: 70,
