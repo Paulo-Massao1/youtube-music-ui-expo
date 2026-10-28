@@ -93,10 +93,15 @@ export default function Index() {
                 <Text style={styles.notificationBadgeText}>7</Text>
               </View>
             </Pressable>
-            <Image
-              source={{ uri: "https://picsum.photos/seed/paulo-profile/120/120" }}
-              style={styles.profileImage}
-            />
+            <Pressable
+              accessibilityLabel="Open account"
+              onPress={() => router.push("/account" as Href)}
+            >
+              <Image
+                source={{ uri: "https://picsum.photos/seed/paulo-profile/120/120" }}
+                style={styles.profileImage}
+              />
+            </Pressable>
           </View>
         </View>
 

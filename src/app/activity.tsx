@@ -145,10 +145,15 @@ export default function ActivityScreen() {
           <Ionicons name="chevron-back" size={31} color="#ffffff" />
         </Pressable>
         <Text style={styles.headerTitle}>Activity</Text>
-        <Image
-          source={{ uri: "https://picsum.photos/seed/paulo-profile/120/120" }}
-          style={styles.profileImage}
-        />
+        <Pressable
+          accessibilityLabel="Open account"
+          onPress={() => router.push("/account" as Href)}
+        >
+          <Image
+            source={{ uri: "https://picsum.photos/seed/paulo-profile/120/120" }}
+            style={styles.profileImage}
+          />
+        </Pressable>
       </View>
 
       <FlatList
