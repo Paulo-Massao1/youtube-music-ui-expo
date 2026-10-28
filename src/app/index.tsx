@@ -1,6 +1,9 @@
 import { Ionicons } from "@expo/vector-icons";
 import { type Href, useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
+import { BottomNavigation } from "@/components/BottomNavigation";
+import { FilterChip } from "@/components/FilterChip";
+import { MiniPlayer } from "@/components/MiniPlayer";
 import { QuickPickRow } from "@/components/QuickPickRow";
 import { SpeedDialTile } from "@/components/SpeedDialTile";
 import {
@@ -18,14 +21,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const filters = ["Podcasts", "Energize", "Relax", "Workout", "Feel good"];
 const tennesseeCover = require("../../assets/images/tennessee-whiskey.jpeg");
-
-function FilterChip(props: { label: string }) {
-  return (
-    <View style={styles.filterChip}>
-      <Text style={styles.filterText}>{props.label}</Text>
-    </View>
-  );
-}
 
 export default function Index() {
   const router = useRouter();
@@ -173,42 +168,14 @@ export default function Index() {
         </View>
       </ScrollView>
 
-      <Pressable
-        accessibilityLabel="Open Tennessee Whiskey player"
+      <MiniPlayer
+        title="Tennessee Whiskey"
+        artist="Chris Stapleton"
+        image={tennesseeCover}
         onPress={() => router.push("/player" as Href)}
-        style={styles.miniPlayer}
-      >
-        <Image source={tennesseeCover} style={styles.miniPlayerCover} />
-        <View style={styles.miniPlayerDetails}>
-          <Text numberOfLines={1} style={styles.miniPlayerTitle}>
-            Tennessee Whiskey
-          </Text>
-          <Text numberOfLines={1} style={styles.miniPlayerArtist}>
-            Chris Stapleton
-          </Text>
-        </View>
-        <Ionicons name="tv-outline" size={27} color="#ffffff" />
-        <Ionicons name="play" size={30} color="#ffffff" />
-      </Pressable>
+      />
 
-      <View style={styles.bottomNavigation}>
-        <View style={styles.navigationItem}>
-          <Ionicons name="home" size={28} color="#ffffff" />
-          <Text style={styles.activeNavigationLabel}>Home</Text>
-        </View>
-        <View style={styles.navigationItem}>
-          <Ionicons name="play-skip-forward-outline" size={28} color="#dedede" />
-          <Text style={styles.navigationLabel}>Samples</Text>
-        </View>
-        <View style={styles.navigationItem}>
-          <Ionicons name="search-outline" size={28} color="#dedede" />
-          <Text style={styles.navigationLabel}>Search</Text>
-        </View>
-        <View style={styles.navigationItem}>
-          <Ionicons name="bookmark-outline" size={28} color="#dedede" />
-          <Text style={styles.navigationLabel}>Library</Text>
-        </View>
-      </View>
+      <BottomNavigation />
     </SafeAreaView>
   );
 }
@@ -285,19 +252,6 @@ const styles = StyleSheet.create({
   filterRow: {
     gap: 10,
     paddingRight: 16,
-  },
-  filterChip: {
-    height: 45,
-    paddingHorizontal: 18,
-    borderRadius: 12,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#292c30",
-  },
-  filterText: {
-    color: "#ffffff",
-    fontSize: 17,
-    fontWeight: "500",
   },
   speedDialHeading: {
     flexDirection: "row",
@@ -399,54 +353,5 @@ const styles = StyleSheet.create({
   alertButton: {
     marginTop: 28,
     marginBottom: 10,
-  },
-  miniPlayer: {
-    height: 70,
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 16,
-    paddingHorizontal: 14,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: "#575757",
-    backgroundColor: "#202020",
-  },
-  miniPlayerCover: {
-    width: 54,
-    height: 54,
-    borderRadius: 3,
-  },
-  miniPlayerDetails: {
-    flex: 1,
-    gap: 2,
-  },
-  miniPlayerTitle: {
-    color: "#ffffff",
-    fontSize: 16,
-    fontWeight: "600",
-  },
-  miniPlayerArtist: {
-    color: "#c6c6c6",
-    fontSize: 15,
-  },
-  bottomNavigation: {
-    height: 66,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-around",
-    backgroundColor: "#202020",
-  },
-  navigationItem: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 4,
-  },
-  navigationLabel: {
-    color: "#dedede",
-    fontSize: 12,
-  },
-  activeNavigationLabel: {
-    color: "#ffffff",
-    fontSize: 12,
   },
 });
