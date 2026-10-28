@@ -1,10 +1,12 @@
 import { Ionicons } from "@expo/vector-icons";
+import { type Href, useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import {
   Alert,
   Button,
   FlatList,
   Image,
+  Pressable,
   ScrollView,
   StyleSheet,
   Text,
@@ -61,6 +63,8 @@ function SongRow(props: {
 }
 
 export default function Index() {
+  const router = useRouter();
+
   return (
     <SafeAreaView style={styles.screen}>
       <StatusBar style="light" />
@@ -79,12 +83,16 @@ export default function Index() {
           </View>
 
           <View style={styles.headerActions}>
-            <View style={styles.notification}>
+            <Pressable
+              accessibilityLabel="Open activity"
+              onPress={() => router.push("/activity" as Href)}
+              style={styles.notification}
+            >
               <Ionicons name="notifications-outline" size={29} color="#ffffff" />
               <View style={styles.notificationBadge}>
                 <Text style={styles.notificationBadgeText}>7</Text>
               </View>
-            </View>
+            </Pressable>
             <Image
               source={{ uri: "https://picsum.photos/seed/paulo-profile/120/120" }}
               style={styles.profileImage}
