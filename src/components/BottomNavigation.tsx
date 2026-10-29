@@ -1,11 +1,12 @@
 import { Ionicons } from "@expo/vector-icons";
-import { StyleSheet, Text, View } from "react-native";
+import { type Href, useRouter } from "expo-router";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 
 const navigationItems = [
-  { label: "Home", icon: "home" },
-  { label: "Samples", icon: "play-skip-forward-outline" },
-  { label: "Search", icon: "search-outline" },
-  { label: "Library", icon: "bookmark-outline" },
+  { label: "Home", icon: "home", href: "/" },
+  { label: "Samples", icon: "play-skip-forward-outline", href: "/samples" },
+  { label: "Search", icon: "search-outline", href: "/search" },
+  { label: "Library", icon: "bookmark-outline", href: "/library" },
 ] as const;
 
 type BottomNavigationProps = {
@@ -15,13 +16,20 @@ type BottomNavigationProps = {
 export function BottomNavigation({
   activeItem = "Home",
 }: BottomNavigationProps) {
+  const router = useRouter();
+
   return (
     <View style={styles.container}>
       {navigationItems.map((item) => {
         const isActive = item.label === activeItem;
 
         return (
-          <View style={styles.item} key={item.label}>
+          <Pressable
+            accessibilityLabel={`Open ${item.label}`}
+            key={item.label}
+            onPress={() => router.replace(item.href as Href)}
+            style={styles.item}
+          >
             <Ionicons
               name={item.icon}
               size={28}
@@ -30,7 +38,7 @@ export function BottomNavigation({
             <Text style={[styles.label, isActive && styles.activeLabel]}>
               {item.label}
             </Text>
-          </View>
+          </Pressable>
         );
       })}
     </View>

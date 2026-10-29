@@ -1,7 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { type Href, useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { BottomNavigation } from "@/components/BottomNavigation";
 import { FilterChip } from "@/components/FilterChip";
 import { MiniPlayer } from "@/components/MiniPlayer";
 import { QuickPickRow } from "@/components/QuickPickRow";
@@ -175,7 +174,6 @@ export default function Index() {
         onPress={() => router.push("/player" as Href)}
       />
 
-      <BottomNavigation />
     </SafeAreaView>
   );
 }
